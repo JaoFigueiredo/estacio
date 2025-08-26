@@ -2,57 +2,47 @@
 #include <stdlib.h>
 #include <time.h>
 
-int main(){
+int main() {
+    int opcao, random;
 
-    int opcao;
-    int random;
+    // inicializa a semente do rand uma única vez
+    srand(time(0));
 
-    printf("Escolha seu destino\n\n");
-    printf("1.Pedra\n");
-    printf("2.Papel\n");
-    printf("3. Tesoura\n");
-    scanf("%i",&opcao);
+    // loop até opção válida
+    do {
+        printf("Escolha seu destino\n\n");
+        printf("1. Pedra\n");
+        printf("2. Papel\n");
+        printf("3. Tesoura\n");
+        printf("Digite sua opção: ");
+        scanf("%d", &opcao);
 
-    switch (opcao)
-    {
-    case 1: 
-        srand(time(0));
-        random = (rand() %3)+1;
-            if(random == 1){
-                printf("Você escolheu pedra, eu escolhi pedra, EMPATE\n!");
-            }else if(random == 2){
-                printf("Você escolheu pedra, eu escolhi papel, VOCÊ PERDEU!\n");
-            }else
-                printf("Você escolheu pedra, eu escolhi tesoura, VOCÊ VENCEU!\n");
-                
-        break;
-    
-    case 2: 
-        srand(time(0));
-        random = (rand() %3)+1;
-            if(random == 1){
-                printf("Você escolheu papel, eu escolhi pedra, VOCÊ VENCEU!\n");
-            }else if(random == 2){
-                printf("Você escolheu papel, eu escolhi papel, EMPATE!\n");
-            }else
-                printf("Você escolheu papel, eu escolhi tesoura, VOCÊ PERDEU!\n");
-        break;
+        if (opcao != 1 && opcao != 2 && opcao != 3) {
+            printf("\nOpção inválida! Tente novamente.\n\n");
+        }
+    } while (opcao != 1 && opcao != 2 && opcao != 3);
 
-    case 3: 
-        srand(time(0));
-        random = (rand() %3)+1;
-            if(random == 1){
-                printf("Você escolheu Tesoura, eu escolhi pedra, VOCÊ PERDEU!\n");
-            }else if(random == 2){
-                printf("Você escolheu Tesoura, eu escolhi papel, VOCÊ VENCEU!\n");
-            }else
-                printf("Você escolheu Tesoura, eu escolhi tesoura, EMPATE!\n");
-        break;
+    // gera jogada do computador
+    random = (rand() % 3) + 1;
 
-        
-    default:
-            printf("ENTÃO VOCE TENTA FUGIR!");
-        break;
+    switch (opcao) {
+        case 1: // Pedra
+            if (random == 1) printf("Você escolheu Pedra, eu escolhi Pedra → EMPATE!\n");
+            else if (random == 2) printf("Você escolheu Pedra, eu escolhi Papel → VOCÊ PERDEU!\n");
+            else printf("Você escolheu Pedra, eu escolhi Tesoura → VOCÊ VENCEU!\n");
+            break;
+
+        case 2: // Papel
+            if (random == 1) printf("Você escolheu Papel, eu escolhi Pedra → VOCÊ VENCEU!\n");
+            else if (random == 2) printf("Você escolheu Papel, eu escolhi Papel → EMPATE!\n");
+            else printf("Você escolheu Papel, eu escolhi Tesoura → VOCÊ PERDEU!\n");
+            break;
+
+        case 3: // Tesoura
+            if (random == 1) printf("Você escolheu Tesoura, eu escolhi Pedra → VOCÊ PERDEU!\n");
+            else if (random == 2) printf("Você escolheu Tesoura, eu escolhi Papel → VOCÊ VENCEU!\n");
+            else printf("Você escolheu Tesoura, eu escolhi Tesoura → EMPATE!\n");
+            break;
     }
 
     return 0;
